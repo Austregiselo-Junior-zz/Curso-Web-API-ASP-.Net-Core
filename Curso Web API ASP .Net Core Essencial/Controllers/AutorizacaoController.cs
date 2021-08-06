@@ -1,12 +1,8 @@
 ﻿using Curso_Web_API_ASP_.Net_Core_Essencial.Models.Entitys;
+using Curso_Web_API_ASP_.Net_Core_Essencial.Models.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
-using Microsoft.IdentityModel.Tokens;
 using System;
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Curso_Web_API_ASP_.Net_Core_Essencial.Controllers
@@ -17,15 +13,12 @@ namespace Curso_Web_API_ASP_.Net_Core_Essencial.Controllers
     {
         private readonly UserManager<IdentityUser> UserManager;
         private readonly SignInManager<IdentityUser> SignInManager;
-        private readonly IConfiguration Config;
 
-        public AutorizacaoController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager, IConfiguration config)
+        public AutorizacaoController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager)
         {
             UserManager = userManager;
             SignInManager = signInManager;
-            Config = config;
         }
-
 
 
         /// <summary>
@@ -59,8 +52,8 @@ namespace Curso_Web_API_ASP_.Net_Core_Essencial.Controllers
                 else
                 {
                     await SignInManager.SignInAsync(user, false);
-
-                    return Ok(GerarToken(entity));
+                    var service = new GeracaodeToken();
+                    return Ok(service.GerarToken(entity));
                 }
             }
             catch (Exception ex)
@@ -84,7 +77,8 @@ namespace Curso_Web_API_ASP_.Net_Core_Essencial.Controllers
 
                 if (result.Succeeded)
                 {
-                    return Ok(GerarToken(entity));
+                    var service = new GeracaodeToken();
+                    return Ok(service.GerarToken(entity));
                 }
                 else
                 {
@@ -98,36 +92,6 @@ namespace Curso_Web_API_ASP_.Net_Core_Essencial.Controllers
             }
         }
 
-        /// <summary>
-        /// Método para gerar o token Jwt. (O código abaixo está retornando um erro!!!)
-        /// </summary>
-        /// <param name="usuario"></param>
-        /// <returns>Retorna um objeto.</returns>
-        public string GerarToken(UsuarioEntity usuario)
-        {
-            try
-            {
-                var tokenHandler = new JwtSecurityTokenHandler();
-                var key = Encoding.ASCII.GetBytes(Config["Jwt:Key"]);
-                var tokenDescriptor = new SecurityTokenDescriptor
-                {
-                    Subject = new ClaimsIdentity(new Claim[]
-                    {
-                    new Claim(ClaimTypes.Name, usuario.Nome.ToString()),
-                    new Claim(ClaimTypes.Email, usuario.Email.ToString())
-                    }),
-                    Expires = DateTime.UtcNow.AddHours(2),
-                    SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
-                };
-                var token = tokenHandler.CreateToken(tokenDescriptor);
-                return tokenHandler.WriteToken(token);
-            }
-            catch (Exception ex)
-            {
-                return ex.Message;
-            }
-
-
-        }
+       
     }
 }
