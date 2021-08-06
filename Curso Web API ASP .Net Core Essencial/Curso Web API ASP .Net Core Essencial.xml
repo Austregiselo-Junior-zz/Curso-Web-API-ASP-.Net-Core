@@ -1,0 +1,110 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Curso Web API ASP .Net Core Essencial</name>
+    </assembly>
+    <members>
+        <member name="M:Curso_Web_API_ASP_.Net_Core_Essencial.Controllers.AutorizacaoController.Get">
+            <summary>
+            Método que verifica se a API ta atendento.
+            </summary>
+            <returns>Horário atual da requisição</returns>
+        </member>
+        <member name="M:Curso_Web_API_ASP_.Net_Core_Essencial.Controllers.AutorizacaoController.Register(Curso_Web_API_ASP_.Net_Core_Essencial.Models.Entitys.UsuarioEntity)">
+            <summary>
+            Método para registro do usuário
+            </summary>
+            <param name="entity"></param>
+            <returns>Token de validação</returns>
+        </member>
+        <member name="M:Curso_Web_API_ASP_.Net_Core_Essencial.Controllers.AutorizacaoController.Login(Curso_Web_API_ASP_.Net_Core_Essencial.Models.Entitys.UsuarioEntity)">
+            <summary>
+            Método que verifica as credenciais do usuário, com menssagem de OK ou BadRequest para o usuário.
+            </summary>
+            <param name="entity"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Curso_Web_API_ASP_.Net_Core_Essencial.Controllers.AutorizacaoController.GerarToken(Curso_Web_API_ASP_.Net_Core_Essencial.Models.Entitys.UsuarioEntity)">
+            <summary>
+            Método para gerar o token Jwt. (O código abaixo está retornando um erro!!!)
+            </summary>
+            <param name="usuario"></param>
+            <returns>Retorna um objeto.</returns>
+        </member>
+        <member name="M:Curso_Web_API_ASP_.Net_Core_Essencial.Controllers.CategoriasController.GetAsync">
+            <summary>
+            Ação que retorna todas as categorias..  
+            </summary>
+            <returns>Lista de catgorias.</returns>
+        </member>
+        <member name="M:Curso_Web_API_ASP_.Net_Core_Essencial.Controllers.CategoriasController.GetAsync(System.Int32)">
+            <summary>
+            Ação que retorna a categoria com base no "<paramref name="id"/>" um inteiro >= a 1, passado pelo usuário.
+            </summary>
+            <param name="id"></param>
+            <returns>Se a categoria fo achada, ela será retornada, mas caso a categoria cujo "Id" informado não exista será retornado erro.</returns>
+        </member>
+        <member name="M:Curso_Web_API_ASP_.Net_Core_Essencial.Controllers.CategoriasController.PostAsync(Curso_Web_API_ASP_.Net_Core_Essencial.Models.Entitys.CategoriaEntity)">
+            <summary>
+            Ação que adiciona um produto ao banco de dados. Os dados a serem adicionados devem ser passados no corpo da requisição.
+            </summary>
+            <param name="categoria"></param>
+            <returns>Retorna a rota em que o produto pode ser encontrado.</returns>
+        </member>
+        <member name="M:Curso_Web_API_ASP_.Net_Core_Essencial.Controllers.CategoriasController.PutAsync(System.Int32,Curso_Web_API_ASP_.Net_Core_Essencial.Models.Entitys.CategoriaEntity)">
+            <summary>
+            Ação em que a categora é atualizada com base no "<paramref name="id"/>" um inteiro >= a 1" passado e no "<paramref name="categoria"/>" adicionado.
+            </summary>
+            <param name="id"></param>
+            <param name="categoria"></param>
+            <returns>Se o Id da categoria passada for igual ao Id em que está no banco ele será atualizado, caso negativo retornará erro.</returns>
+        </member>
+        <member name="M:Curso_Web_API_ASP_.Net_Core_Essencial.Controllers.CategoriasController.DeleteAsync(System.Int32)">
+            <summary>
+            Ação para deletar uma categoria com base no "<paramref name="id"/>" um inteiro >= a 1" passado pelo usuário.
+            </summary>
+            <param name="id"></param>
+            <returns>Caso o Id passado não corresponder a um Id do banco de dados será retonado um erro, mas em caso aformativo será retornado a categoroa deletada.</returns>
+        </member>
+        <member name="M:Curso_Web_API_ASP_.Net_Core_Essencial.Controllers.DesenvolvedorController.GetDesenvolvedor">
+            <summary>
+            Ação para receber os dados de nome e contato do autor.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Curso_Web_API_ASP_.Net_Core_Essencial.Controllers.ProdutosController.GetAsync">
+            <summary>
+            Ação que retorna todos os produtos.
+            </summary>
+            <returns>Lista de produtos.</returns>
+        </member>
+        <member name="M:Curso_Web_API_ASP_.Net_Core_Essencial.Controllers.ProdutosController.GetAsync(System.Int32)">
+            <summary>
+            Ação que retorna um produto em específico, o usuário precisa adicionar um "<paramref name="id"/>", sendo um inteiro >= a 1.
+            </summary>
+            <returns>O produto cujo o "<paramref name="id"/>" foi adicionado.</returns>
+        </member>
+        <member name="M:Curso_Web_API_ASP_.Net_Core_Essencial.Controllers.ProdutosController.PostAsync(Curso_Web_API_ASP_.Net_Core_Essencial.Models.Entitys.ProdutoEntity)">
+            <summary>
+            Ação que adicionado um produto ao banco de dados, para isso o usuário deve adicionar os dados no corpo da requisisão.
+            </summary>
+            <param name="produto"></param>
+            <returns>Retorna a URL do produto adicionado.</returns>
+        </member>
+        <member name="M:Curso_Web_API_ASP_.Net_Core_Essencial.Controllers.ProdutosController.PutAsync(System.Int32,Curso_Web_API_ASP_.Net_Core_Essencial.Models.Entitys.ProdutoEntity)">
+            <summary>
+            Ação para atualizar um produto através de um Id específico, onde o usuário entrará com esse Id, sendo um inteiro >= a 1.
+            </summary>
+            <param name="id"></param>
+            <param name="produto"></param>
+            <returns>Se o produto menssagem de erro (Produto com Id não existente), ou sucesso.</returns>
+        </member>
+        <member name="M:Curso_Web_API_ASP_.Net_Core_Essencial.Controllers.ProdutosController.DeleteAsync(System.Int32)">
+            <summary>
+            Ação que deleta um produto em específico. O usuário deve informar o "<paramref name="id"/>" inteiro >= a 1, cujo o produto deve ser excluído.
+            </summary>
+            <param name="id"></param>
+            <returns>Se o produto por encontrado retornará o produto deletado, ou se o produto não for encontrado será emitida ima menssagem de erro.</returns>
+        </member>
+    </members>
+</doc>
